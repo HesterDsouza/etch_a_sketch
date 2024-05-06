@@ -1,0 +1,41 @@
+.btn {
+    display: flex;
+    padding: 10px;
+}
+
+.numSqrs {
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    width: 100px;
+    background-color: #12ff12;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    max-width: 1080px; /* Limit container width */
+    margin: 0 auto; /* Center container horizontally */
+}
+
+.containerItem {
+    box-sizing: border-box;
+    border: 0.5px solid #777;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+/* Adjust container item size based on grid size */
+.containerItem {
+    width: calc(100% / var(--grid-size));
+    height: calc(100% / var(--grid-size));
+}
+
+.containerItem:hover {
+    background-color: #12ff12;
+    transform: scale(1.1);
+}
