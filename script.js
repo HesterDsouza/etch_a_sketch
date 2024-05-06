@@ -2,9 +2,31 @@ const btnDiv = document.querySelector(".btn")
 const container = document.querySelector(".container")
 let gridSize = 16;
 
-const button = document.createElement("button");
-button.classList.add("numSqrs")
-button.textContent = "New Grid"
+const newGridBtn = document.createElement("button");
+newGridBtn.classList.add("newGrid");
+newGridBtn.textContent = "New Grid";
+
+const removeGridBtn = document.createElement("button");
+removeGridBtn.classList.add("removeGrid");
+removeGridBtn.textContent = "Remove Grid";
+
+const eraseBtn = document.createElement("button");
+eraseBtn.classList.add("clearGrid");
+eraseBtn.textContent = "Clear Grid";
+
+function colorGrid(){
+    container.addEventListener("mouseover", function(event){
+        if(event.target.classList.contains("containerItem")){
+            event.target.classList.add("bgColor")
+        }
+    })
+}
+
+function eraseGrid() {
+    container.querySelectorAll(".containerItem.bgColor").forEach(item => {
+        item.classList.remove("bgColor");
+    });
+}
 
 function removeGrid(){
     while(container.firstChild){
@@ -13,40 +35,32 @@ function removeGrid(){
 }
 
 function newGrid(){
-    const addNewGrid = Number(prompt("Create new box grid. Enter your choice for grid size. (Eg. entering 10 will create a grid of 10*10): "));
+    const addNewGrid = Number(prompt("Enter your choice for grid size. (Eg. entering 10 will create a grid of 10*10): "));
     console.log("Grid Size selected:",addNewGrid)
     if(isNaN(addNewGrid)){
         alert('Please enter a number');
     } else if(addNewGrid <= 0 || addNewGrid > 100){
         alert('Number must be between 1 and 100')
     }else{
-        gridSize = addNewGrid
-        const totalPixels = container.offsetWidth;
-        const squareSize = totalPixels / gridSize;
+        gridSize = addNewGrid;
+        container.style.setProperty('--grid-size', gridSize);
+        removeGrid();
         for(let i=0; i< gridSize * gridSize; i++){
             const containerItem = document.createElement("div");
             containerItem.classList.add("containerItem");
-            containerItem.style.width = `${squareSize}px`;
-            containerItem.style.height = `${squareSize}px`
             container.appendChild(containerItem)
         }
     }
 }
 
-button.addEventListener("click", () => {
-        removeGrid();
-        newGrid();
-})
+colorGrid()
 
-btnDiv.appendChild(button)
+newGridBtn.addEventListener("click", newGrid);
 
-const totalPixels = container.offsetWidth;
-const squareSize = totalPixels / gridSize;
+removeGridBtn.addEventListener("click", removeGrid);
 
-for(let i=0; i< gridSize * gridSize; i++){
-    const containerItem = document.createElement("div");
-    containerItem.classList.add("containerItem");
-    containerItem.style.width = `${squareSize}px`;
-    containerItem.style.height = `${squareSize}px`
-    container.appendChild(containerItem)
-}
+eraseBtn.addEventListener("click", eraseGrid);
+
+btnDiv.appendChild(newGridBtn);
+btnDiv.appendChild(removeGridBtn);
+btnDiv.appendChild(eraseBtn);

@@ -1,41 +1,53 @@
 .btn {
     display: flex;
     padding: 10px;
+    gap: 10px;
 }
 
-.numSqrs {
+.newGrid, .removeGrid, .clearGrid{
     border: none;
     border-radius: 10px;
     padding: 5px;
-    width: 100px;
-    background-color: #12ff12;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
+}
+
+.newGrid {
+    width: 100px;
+    background-color: #12ff12;  
+}
+
+.removeGrid{
+    width: 120px;
+    background-color: #ff1212;
+}
+
+.clearGrid{
+    width: 100px;
+    background-color: #a19f9f;
 }
 
 .container {
     display: flex;
     flex-wrap: wrap;
     padding: 10px;
-    max-width: 1080px; /* Limit container width */
+    max-width: 960px; /* Limit container width */
     margin: 0 auto; /* Center container horizontally */
 }
 
 .containerItem {
     box-sizing: border-box;
-    border: 0.5px solid #777;
-    transition: all 0.5s ease;
+    border: 0.5px solid #000;
     cursor: pointer;
-}
-
-/* Adjust container item size based on grid size */
-.containerItem {
+    /* Set width to 100% divided by the number of columns */
     width: calc(100% / var(--grid-size));
-    height: calc(100% / var(--grid-size));
+    /* Set height to maintain aspect ratio (square) */
+    padding-top: calc(100% / var(--grid-size));
+    flex-grow: 0; /* Prevent items from growing */
+    flex-shrink: 0; /* Prevent items from shrinking */
 }
 
-.containerItem:hover {
-    background-color: #12ff12;
-    transform: scale(1.1);
+.bgColor{
+    background-color: #000;
 }
